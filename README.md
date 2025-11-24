@@ -4,7 +4,8 @@
 
 Nexus Tab is a lightweight custom theme for your browser designed to replace the cluttered default new tab with a clean, distraction-free interface. Built entirely with **Vanilla HTML, CSS, and JavaScript**, it ensures zero lag and instant load times.
 
-![Nexus Tab Preview](screenshot.png)
+<img width="1919" height="1013" alt="image" src="https://github.com/user-attachments/assets/5201d579-fed3-4616-ab2e-acca2ec507d2" />
+
 *(Note: Add a screenshot of your tab here named 'screenshot.png' for a better preview!)*
 
 ## ✨ Features
@@ -20,7 +21,7 @@ Nexus Tab is a lightweight custom theme for your browser designed to replace the
 * **CSS3** (Styling & Animations)
 * **JavaScript** (Logic & DOM Manipulation)
 
----
+
 
 ## 📥 How to Install (Developer Mode)
 
@@ -43,7 +44,7 @@ Since this is a custom developer tool, you can install it directly into Chrome i
 ### Step 3: Enjoy!
 Open a new tab, and you will see **Nexus Tab** in action! 🚀
 
----
+
 
 ## 🤝 Contributing
 
@@ -59,6 +60,5 @@ Contributions are welcome! If you want to add features (like a To-Do list, weath
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
----
 
 **Made with ❤️ by [Manoj Chavan](https://github.com/manoj-chavan-13)**
