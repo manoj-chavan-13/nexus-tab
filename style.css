@@ -1,0 +1,438 @@
+:root {
+  /* Base Palette */
+  --bg-deep: #020617;
+  --bg-surface: #0f172a;
+
+  /* Dev Colors */
+  --accent-green: #22c55e;
+  --accent-blue: #3b82f6;
+  --accent-purple: #8b5cf6;
+  --accent-yellow: #eab308;
+  --accent-red: #ef4444;
+  --text-muted: #64748b;
+
+  /* Glass & Glow */
+  --glass-bg: rgba(15, 23, 42, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.05);
+  --glow-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  user-select: none;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: #fff;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* --- VISUALS --- */
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.ambient-light {
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.08) 0%,
+    transparent 70%
+  );
+  top: -300px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.scanline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 50%,
+    rgba(0, 0, 0, 0.3) 51%
+  );
+  background-size: 100% 4px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+/* --- TOP NAVIGATION --- */
+.top-bar {
+  position: relative;
+  z-index: 50;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.badge.active {
+  color: var(--accent-green);
+  border-color: rgba(34, 197, 94, 0.2);
+  background: rgba(34, 197, 94, 0.05);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 8px currentColor;
+  animation: pulse 2s infinite;
+}
+
+/* System Stats Widget */
+.sys-stats {
+  display: flex;
+  gap: 16px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+.stat-item {
+  display: flex;
+  gap: 6px;
+}
+.stat-label {
+  color: #475569;
+  font-weight: 700;
+}
+.stat-value {
+  color: var(--accent-blue);
+}
+
+/* --- MAIN CONTENT --- */
+main {
+  flex: 1;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding-bottom: 80px;
+}
+
+.logo-section h1 {
+  font-size: 72px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  background: linear-gradient(to bottom, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.logo-section p {
+  text-align: center;
+  color: var(--text-muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+}
+
+/* --- TERMINAL WINDOW --- */
+.terminal {
+  width: 680px;
+  background: #090e14;
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.terminal:focus-within {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.1);
+}
+
+.terminal-header {
+  background: #111827;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.traffic-light {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.close {
+  background: #ef4444;
+}
+.min {
+  background: #f59e0b;
+}
+.max {
+  background: #22c55e;
+}
+.term-title {
+  margin-left: auto;
+  color: #4b5563;
+  font-size: 11px;
+}
+
+.terminal-body {
+  padding: 20px;
+  color: #e2e8f0;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+
+/* Logs Styling */
+.line {
+  display: flex;
+  gap: 10px;
+  opacity: 1;
+  margin-bottom: 6px;
+}
+
+.ts {
+  color: #475569;
+  user-select: none;
+  min-width: 65px;
+  font-size: 12px;
+}
+.info {
+  color: var(--accent-blue);
+}
+.success {
+  color: var(--accent-green);
+}
+.warn {
+  color: var(--accent-yellow);
+}
+.cmd-echo {
+  color: #fff;
+  font-weight: 700;
+}
+.sub-log {
+  color: #64748b;
+  font-size: 12px;
+  margin-left: 75px;
+  font-style: italic;
+}
+
+/* ZSH Prompt Styling */
+.prompt-wrapper {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 15px;
+}
+
+.p-path {
+  color: var(--accent-blue);
+  font-weight: 700;
+  margin-right: 8px;
+}
+.p-git {
+  color: var(--accent-purple);
+  font-weight: 600;
+  margin-right: 8px;
+}
+.p-arrow {
+  color: var(--accent-green);
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.cmd-input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: inherit;
+  flex: 1;
+  caret-color: var(--accent-green);
+}
+.cmd-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  font-style: normal;
+}
+
+/* --- DOCK --- */
+.dock-wrapper {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+}
+
+.dock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px;
+  background: rgba(2, 6, 23, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.dock-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  text-decoration: none;
+  position: relative;
+}
+
+.dock-icon:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-6px) scale(1.1);
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.dock-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+}
+
+/* Tooltips */
+.dock-icon::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -35px;
+  background: #1e293b;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: "JetBrains Mono", monospace;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
+  white-space: nowrap;
+  border: 1px solid #334155;
+}
+.dock-icon:hover::after {
+  opacity: 1;
+  top: -45px;
+}
+
+.separator {
+  width: 1px;
+  height: 24px;
+  background: #1e293b;
+  margin: 0 4px;
+}
+
+.weather-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 48px;
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border-radius: 12px;
+  border: 1px solid #334155;
+  cursor: default;
+  position: relative;
+}
+.w-temp {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+.w-icon {
+  font-size: 16px;
+  margin-bottom: 2px;
+}
+
+/* Weather Tooltip */
+.weather-box::after {
+  content: attr(title);
+  position: absolute;
+  top: -35px;
+  background: #1e293b;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: "JetBrains Mono", monospace;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s;
+  white-space: nowrap;
+  border: 1px solid #334155;
+}
+.weather-box:hover::after {
+  opacity: 1;
+  top: -45px;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#020617">
+    <title>New Tab</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Visuals -->
+    <div class="bg-grid"></div>
+    <div class="ambient-light"></div>
+    <div class="scanline"></div>
+
+    <!-- Top Bar -->
+    <header class="top-bar">
+        <div class="status-container">
+            <div class="badge active"><span class="status-dot"></span>ONLINE</div>
+            <div class="badge">SHIELD: ON</div>
+        </div>
+
+        <div class="sys-stats">
+            <div class="stat-item"><span class="stat-label">CPU</span><span class="stat-value" id="cpuVal">--%</span>
+            </div>
+            <div class="stat-item"><span class="stat-label">MEM</span><span class="stat-value" id="memVal">--GB</span>
+            </div>
+            <div class="stat-item"><span class="stat-label">NET</span><span class="stat-value" id="netVal">--ms</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <div class="logo-section">
+            <h1>Dev.Space</h1>
+            <p>v3.0.3 // WORKSPACE INITIALIZED</p>
+        </div>
+
+        <div class="terminal" id="terminal">
+            <div class="terminal-header">
+                <div class="traffic-light close"></div>
+                <div class="traffic-light min"></div>
+                <div class="traffic-light max"></div>
+                <div class="term-title">zsh — 80x24</div>
+            </div>
+            <div class="terminal-body" id="termBody">
+                <!-- Static Logs (Rendered immediately without JS) -->
+                <div class="line"><span class="ts">[Boot]</span> <span class="cmd-echo">➜ init-session
+                        --mode="focused"</span></div>
+                <div class="line" id="logEnv"><span class="ts">[0.02s]</span> <span class="info">Scanning
+                        environment...</span></div>
+                <div class="line"><span class="ts">[0.05s]</span> <span class="warn">△ Hint: hit '/' to search</span>
+                </div>
+            </div>
+            <!-- ZSH Prompt -->
+            <div style="padding: 0 20px 20px 20px;">
+                <div class="prompt-wrapper">
+                    <span class="p-path">~/workspace</span>
+                    <span class="p-git">git:(<span style="color:#ef4444">dev</span>)</span>
+                    <span class="p-arrow">➜</span>
+                    <form action="https://www.google.com/search" method="GET" style="flex:1; display:flex;">
+                        <input type="text" name="q" class="cmd-input" placeholder="// enter_query_to_search..."
+                            autofocus autocomplete="off" spellcheck="false">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Dock -->
+    <div class="dock-wrapper">
+        <div class="dock">
+            <a href="https://github.com" class="dock-icon" data-tooltip="GitHub">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+            </a>
+            <a href="https://stackoverflow.com" class="dock-icon" data-tooltip="StackOverflow">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M15.725 0l-1.97 1.91 8.702 9.006 1.968-1.91L15.725 0zM2.994 20.757v3.239h18.033v-3.24H2.994zm2.492-1.832h13.026v1.836H5.486v-1.836zm.36-3.983l12.735 2.676.376-1.79-12.736-2.676-.375 1.79zm1.693-3.96l11.72 5.572.775-1.63-11.72-5.572-.775 1.63zm3.32-3.613l10.096 8.127 1.16-1.44L10.86 5.93l-1.16 1.44z" />
+                </svg>
+            </a>
+            <a href="https://console.cloud.google.com" class="dock-icon" data-tooltip="Google Cloud">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z" />
+                </svg>
+            </a>
+
+            <div class="separator"></div>
+
+            <a href="https://mail.google.com" class="dock-icon" data-tooltip="Gmail">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                </svg>
+            </a>
+            <a href="https://youtube.com" class="dock-icon" data-tooltip="YouTube">
+                <svg viewBox="0 0 24 24">
+                    <path
+                        d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z" />
+                </svg>
+            </a>
+
+            <div class="separator"></div>
+
+            <div class="weather-box" id="weatherWidget" title="Checking location...">
+                <div class="w-icon">☀️</div>
+                <div class="w-temp">--°</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link to external JS -->
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+# Ignore cached theme package folder
+cached-theme-package/
+theme-cache/
+cache/theme/
+# (Use the exact folder name you want to ignore)
+
+# Ignore specific HTML file
+new.html
+
+# Ignore Cached Theme file
+Cached Theme.pak
+*.pak
